@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forny Style — Panel del barbero</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="pole-stripe"></div>
+
+<div class="admin-shell">
+
+  <div class="firebase-warning" id="firebase-warning">
+    Firebase no está configurado todavía (ver <code>js/firebase-config.js</code>). El panel funciona en modo de
+    vista previa: puedes probar todo, pero los datos solo se guardan en este navegador, no en la nube.
+  </div>
+
+  <!-- LOGIN -->
+  <div class="login-box" id="login-screen">
+    <h2>Acceso del barbero</h2>
+    <form id="login-form">
+      <label for="login-email">Correo</label>
+      <input type="text" id="login-email" placeholder="tucorreo@ejemplo.com">
+      <label for="login-pass">Contraseña</label>
+      <input type="password" id="login-pass">
+      <button type="submit" class="btn btn-primary" style="width:100%;">Entrar</button>
+      <div id="login-error"></div>
+    </form>
+  </div>
+
+  <!-- PANEL ADMIN -->
+  <div id="admin-screen" style="display:none;">
+    <div class="admin-topbar">
+      <div class="brand">
+        <span data-nombre-negocio></span> · Panel
+      </div>
+      <button class="btn btn-ghost" id="logout-btn">Cerrar sesión</button>
+    </div>
+
+    <div class="admin-main">
+
+      <div class="admin-card">
+        <h2>Disponibilidad por fecha</h2>
+        <label for="admin-fecha">Fecha</label>
+        <input type="date" id="admin-fecha">
+        <p class="resumen-overrides" id="resumen-overrides"></p>
+
+        <div id="bloques-editor" style="margin-top:14px;"></div>
+
+        <div class="admin-btn-row">
+          <button type="button" class="btn btn-ghost" id="btn-agregar-bloque">+ Agregar horario</button>
+          <button type="button" class="btn btn-block" id="btn-bloquear-dia">Bloquear todo el día</button>
+          <button type="button" class="btn btn-block" id="btn-abrir-dia">Permitir todo el día</button>
+          <button type="button" class="btn btn-ghost" id="btn-quitar-override">Quitar ajuste (volver a horario normal)</button>
+          <button type="button" class="btn btn-primary" id="btn-guardar-dia">Guardar para esta fecha</button>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Citas</h2>
+        <div id="citas-lista"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Firebase (compat SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/business-config.js"></script>
+<script src="js/data-store.js"></script>
+<script src="js/availability.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin-panel.js"></script>
+<script>
+  document.querySelectorAll("[data-nombre-negocio]").forEach(el => (el.textContent = BUSINESS_CONFIG.nombre));
+  iniciarProteccionAdmin(() => iniciarPanelAdmin());
+</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forny Style — Reserva tu cita</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="pole-stripe"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <img id="logo-img" alt="Forny Style" style="display:none;" onload="this.style.display='block'">
+      <span data-nombre-negocio></span>
+    </div>
+    <nav class="main-nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#galeria">Trabajos</a>
+      <a href="#pagos">Pagos</a>
+      <a href="#reserva">Reservar</a>
+    </nav>
+    <a href="#reserva" class="btn btn-primary">Reservar cita</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1><em data-nombre-negocio></em></h1>
+  <p data-hero-frase></p>
+  <div class="hero-actions">
+    <a href="#reserva" class="btn btn-primary">Reservar cita</a>
+    <a href="#servicios" class="btn btn-ghost">Ver servicios</a>
+  </div>
+</section>
+
+<main class="container">
+
+  <section id="servicios">
+    <h2 class="section-title">Servicios</h2>
+    <p class="section-sub">Precios reales, sin sorpresas.</p>
+    <div class="servicios-grid" id="servicios-grid"></div>
+  </section>
+
+  <section id="sobre-nosotros">
+    <h2 class="section-title">Sobre Forny Style</h2>
+    <p class="section-sub">Más que un corte, una experiencia.</p>
+
+    <div class="side-card">
+      <p>
+        Forny Style es una barbería que ofrece un servicio de calidad,
+        buscando que cada cliente reciba un trato digno y personalizado.
+        Cualquier duda relacionada con su corte o con los servicios
+        ofrecidos será atendida y aclarada para que tenga la mejor
+        experiencia posible.
+      </p>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <h2 class="section-title">Trabajos realizados</h2>
+    <p class="section-sub">Conoce algunos de nuestros cortes.</p>
+    <div class="galeria-grid" id="galeria-grid"></div>
+  </section>
+
+  <section id="reconocimientos">
+    <h2 class="section-title">Reconocimientos</h2>
+    <p class="section-sub">
+      Preparación, dedicación y reconocimiento al trabajo de Forny Style.
+    </p>
+
+    <div class="galeria-grid">
+      <img
+        src="assets/reconocimiento1.jpeg"
+        alt="Reconocimiento de Forny Style"
+        class="galeria-img"
+        loading="lazy"
+      >
+
+      <img
+        src="assets/reconocimiento2.jpeg"
+        alt="Reconocimiento de Forny Style"
+        class="galeria-img"
+        loading="lazy"
+      >
+    </div>
+  </section>
+
+  <section id="reserva">
+  <h2 class="section-title">Reservar cita</h2>
+  <p class="section-sub">Sin cuenta, sin llamadas — elige tu horario y listo.</p>
+
+  <div class="side-card">
+    <h3>Horario habitual</h3>
+    <p><strong>Lunes a sábado: 10:00 AM – 8:00 PM</strong></p>
+    <p>El horario está sujeto a cambios por imprevistos. Al seleccionar una fecha, consulta los horarios disponibles para ese día.</p>
+  </div>
+
+  <div class="booking-grid">
+    <form id="form-reserva">
+      <label for="f-servicio">Servicio</label>
+      <select id="f-servicio"></select>
+
+      <label for="f-fecha">Fecha</label>
+      <input type="date" id="f-fecha">
+
+      <label>Horario disponible</label>
+      <div class="slots" id="horarios-disponibles"></div>
+
+      <label for="f-nombre">Nombre</label>
+      <input type="text" id="f-nombre" placeholder="Tu nombre">
+
+      <label for="f-telefono">Teléfono</label>
+      <input type="tel" id="f-telefono" placeholder="Tu número">
+
+      <button type="submit" class="btn btn-primary" id="btn-confirmar" disabled>Selecciona un horario</button>
+      <div class="reserva-mensaje" id="reserva-mensaje"></div>
+    </form>
+
+    <div class="side-card">
+      <h3>Cómo funciona</h3>
+      <ul>
+        <li>Solo se muestran horarios realmente disponibles ese día.</li>
+        <li>Los horarios ya ocupados aparecen tachados.</li>
+        <li>Tu cita queda confirmada al instante.</li>
+      </ul>
+      <p>¿Prefieres avisar directo? Escríbenos al <strong data-telefono></strong>.</p>
+      <p><strong>Ubicación:</strong> <span data-direccion></span></p>
+    </div>
+  </div>
+</section>
+
+  <section id="pagos">
+    <h2 class="section-title">Formas de pago</h2>
+    <p class="section-sub">El pago se realiza en el local — efectivo o transferencia.</p>
+    <div class="side-card">
+      <h3>Transferencia bancaria</h3>
+      <div id="datos-bancarios"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="lightbox"><img id="lightbox-img" alt="Trabajo ampliado"></div>
+
+<footer>
+  <div id="redes-sociales"></div>
+  <p data-footer-texto></p>
+</footer>
+
+<!-- Firebase (compat SDK, sin necesidad de bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/business-config.js"></script>
+<script src="js/data-store.js"></script>
+<script src="js/availability.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

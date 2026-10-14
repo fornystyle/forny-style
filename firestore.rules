@@ -1,0 +1,46 @@
+/**
+ * REGLAS DE SEGURIDAD DE FIRESTORE — FORNY STYLE
+ * -------------------------------------------------
+ * Esto NO se sube a GitHub Pages. Se pega directo en:
+ * Firebase Console → Firestore Database → Reglas → pegar esto → Publicar.
+ *
+ * Qué protege:
+ * - citas:          cualquiera (incluso sin cuenta) puede CREAR una cita.
+ *                    Nadie sin sesión iniciada puede LEER, EDITAR ni BORRAR citas.
+ * - disponibilidad: cualquiera puede LEER (para saber qué horarios hay libres).
+ *                    Solo un administrador con sesión iniciada puede EDITARLA.
+ * - configuracion:  lectura pública, escritura solo con sesión iniciada.
+ *
+ * Así, aunque alguien oculte botones del sitio con herramientas del navegador,
+ * el servidor de Firebase sigue rechazando cualquier intento de modificar
+ * disponibilidad o citas existentes sin haber iniciado sesión como admin.
+ */
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function esReservaValida(data) {
+      return data.keys().hasAll(['fecha', 'hora', 'nombre', 'telefono', 'servicio', 'precio'])
+        && data.nombre is string && data.nombre.size() > 0
+        && data.telefono is string && data.telefono.size() > 0
+        && data.fecha is string
+        && data.hora is string;
+    }
+
+    match /citas/{citaId} {
+      allow create: if esReservaValida(request.resource.data);
+      allow read, update, delete: if request.auth != null;
+    }
+
+    match /disponibilidad/{fecha} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    match /configuracion/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
