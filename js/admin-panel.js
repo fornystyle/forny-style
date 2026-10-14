@@ -61,12 +61,27 @@ function render() {
 }
 
 async function cargarFecha() {
+  if (!fechaInput.value) {
+    fechaInput.value = hoyISO();
+  }
+
   const fecha = fechaInput.value;
+
+  if (!fecha) {
+    console.error("[Forny Style] No se pudo determinar la fecha.");
+    return;
+  }
+
   const override = await DataStore.getDisponibilidad(fecha);
-  bloquesActuales = override ? JSON.parse(JSON.stringify(override.bloques || [])) : [];
+
+  bloquesActuales = override
+    ? JSON.parse(JSON.stringify(override.bloques || []))
+    : [];
+
   resumenOverrides.textContent = describirOverride(override);
   render();
 }
+
 
 fechaInput.addEventListener("change", cargarFecha);
 
