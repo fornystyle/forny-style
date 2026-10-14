@@ -1,4 +1,3 @@
-```javascript
 /**
  * AUTENTICACIÓN DEL ADMINISTRADOR
  * Solo las cuentas autorizadas pueden ver el panel.
@@ -68,4 +67,3 @@ loginForm.addEventListener("submit", async e => {
 logoutBtn.addEventListener("click", () => {
   if (firebaseReady) auth.signOut();
 });
-```
