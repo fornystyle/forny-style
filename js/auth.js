@@ -1,4 +1,4 @@
-/**
+/*
 * AUTENTICACIÓN DEL ADMINISTRADOR
  * Solo las cuentas autorizadas pueden ver el panel.
  * Firestore sigue siendo responsable de proteger los datos.
