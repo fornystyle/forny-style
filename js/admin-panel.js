@@ -125,7 +125,7 @@ async function renderCitas() {
     (a.fecha + a.hora).localeCompare(b.fecha + b.hora)
   );
 
-  citasFuturas.forEach(c => {
+    citasFuturas.forEach(c => {
     const row = document.createElement("div");
     row.className = "cita-row";
     row.innerHTML = `
@@ -137,17 +137,6 @@ async function renderCitas() {
     citasLista.appendChild(row);
   });
 }
-  citas.forEach(c => {
-    const row = document.createElement("div");
-    row.className = "cita-row";
-    row.innerHTML = `
-      <span class="cita-fecha">${c.fecha} · ${c.hora}</span>
-      <span class="cita-nombre">${c.nombre}</span>
-      <span class="cita-servicio">${c.servicio}</span>
-      <span class="cita-telefono">${c.telefono}</span>
-    `;
-    citasLista.appendChild(row);
-  });
 
 function iniciarPanelAdmin() {
   cargarFecha();
