@@ -52,14 +52,24 @@ async function crearCita(cita) {
 }
 
 
-  async function getDisponibilidad(fecha) {
-    if (firebaseReady) {
-      const doc = await db.collection("disponibilidad").doc(fecha).get();
-      return doc.exists ? doc.data() : null;
-    }
-    const all = lsGet(LS_KEYS.disponibilidad, {});
-    return all[fecha] || null;
+async function getDisponibilidad(fecha) {
+  if (typeof fecha !== "string" || !fecha.trim()) {
+    console.error(
+      "[Forny Style] getDisponibilidad recibió una fecha vacía:",
+      fecha
+    );
+    return null;
   }
+
+  if (firebaseReady) {
+    const doc = await db.collection("disponibilidad").doc(fecha).get();
+    return doc.exists ? doc.data() : null;
+  }
+
+  const all = lsGet(LS_KEYS.disponibilidad, {});
+  return all[fecha] || null;
+}
+
 
   async function getTodasDisponibilidades() {
     if (firebaseReady) {
