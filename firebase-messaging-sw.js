@@ -2,24 +2,20 @@
 // FORNY STYLE — SERVICIO DE NOTIFICACIONES
 // ==========================================
 
-// Cargar Firebase
 importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
 importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js");
 
-// Configuración de Firebase
 firebase.initializeApp({
-  apiKey: "TU_API_KEY",
+  apiKey: "AIzaSyBQRU-noQpQmKsS61TdnXaLQVL8e2jIBLI",
   authDomain: "forny-style.firebaseapp.com",
   projectId: "forny-style",
   storageBucket: "forny-style.firebasestorage.app",
   messagingSenderId: "1071345954995",
-  appId: "TU_APP_ID"
+  appId: "1:1071345954995:web:122dd0963811455b4080c6"
 });
 
-// Inicializar Firebase Messaging
 const messaging = firebase.messaging();
 
-// Recibir notificaciones en segundo plano
 messaging.onBackgroundMessage((payload) => {
   const notification = payload.notification || {};
 
@@ -34,7 +30,6 @@ messaging.onBackgroundMessage((payload) => {
   );
 });
 
-// Abrir administración al pulsar la notificación
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 
