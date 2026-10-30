@@ -2,22 +2,18 @@
 // FORNY STYLE — SERVICIO DE NOTIFICACIONES
 // ==========================================
 
-importScripts(
-  "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"
-);
-
-importScripts(
-  "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"
-);
+// Cargar Firebase
+importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js");
 
 // Configuración de Firebase
 firebase.initializeApp({
-  apiKey: "AIzaSyBQRU-noQpQmKsS61TdnXaLQVL8e2jIBLI",
+  apiKey: "TU_API_KEY",
   authDomain: "forny-style.firebaseapp.com",
   projectId: "forny-style",
   storageBucket: "forny-style.firebasestorage.app",
   messagingSenderId: "1071345954995",
-  appId: "1:1071345954995:web:122dd0963811455b4080c6"
+  appId: "TU_APP_ID"
 });
 
 // Inicializar Firebase Messaging
@@ -30,9 +26,7 @@ messaging.onBackgroundMessage((payload) => {
   self.registration.showNotification(
     notification.title || "Nueva reserva — Forny Style",
     {
-      body:
-        notification.body ||
-        "Se ha registrado una nueva cita.",
+      body: notification.body || "Se ha registrado una nueva cita.",
       data: {
         url: "https://fornystyle.github.io/forny-style/admin.html"
       }
